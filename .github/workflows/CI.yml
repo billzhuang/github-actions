@@ -37,7 +37,7 @@ jobs:
       
     strategy:
       matrix:
-        short: ${{ fromJson(needs.build.outputs.registries) }}
+        short: [ "${{ needs.build.outputs.registries }}" ]
     steps:
       - name: Run a multi-line script
         env:
