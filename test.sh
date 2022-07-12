@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "::set-output name=registry::My output ($1)"
+echo "::set-output name=registry::My output $1"
