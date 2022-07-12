@@ -20,7 +20,7 @@ jobs:
         short_region: [ew1, cn-1]
         
     outputs:
-      registries: ${{ steps.test.outputs }}
+      registries: ${{ steps.test.outputs.arr }}
 
     steps:
       - uses: actions/checkout@v3
@@ -38,5 +38,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Get output from before step
-          echo ${{ toJSON(needs.build) }}
+          echo ${{ toJSON(needs.build.outputs.registries) }}
 
