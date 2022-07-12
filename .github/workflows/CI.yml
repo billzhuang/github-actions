@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        short_region: [ew1, cn-1]
+        short_region: [cn-1]
         
     outputs:
       registries: ${{ steps.test.outputs.arr }}
@@ -34,9 +34,15 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - build
+      
+    strategy:
+      matrix:
+        short: ${{ fromJson(needs.build.outputs.registries) }}
     steps:
       - name: Run a multi-line script
+        env:
+          input: ${{ needs.build.outputs.registries }}
         run: |
           echo Get output from before step
-          echo ${{ toJSON(needs.build.outputs.registries) }}
+          echo ${{ matrix.short }}
 
