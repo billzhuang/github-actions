@@ -15,12 +15,9 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        short_region: [cn-1]
         
     outputs:
-      registries: ${{ steps.test.outputs.arr }}
+      registry: ${{ steps.test.outputs.arr }}
 
     steps:
       - uses: actions/checkout@v3
@@ -37,12 +34,10 @@ jobs:
       
     strategy:
       matrix:
-        short: [ "${{ needs.build.outputs.registries }}" ]
+        version: ${{ fromJson(needs.build.outputs.registry) }}
     steps:
       - name: Run a multi-line script
-        env:
-          input: ${{ needs.build.outputs.registries }}
         run: |
           echo Get output from before step
-          echo ${{ matrix.short }}
+          echo ${{ matrix.version }}
 
