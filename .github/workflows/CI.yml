@@ -36,6 +36,7 @@ jobs:
       
       - name: echo test
         run: |
+          echo ${{ github.ref }}
           echo ${{ github.ref == 'refs/heads/master' && matrix.ci-role-to-assume || matrix.cd-role-to-assume }}
 
       - name: Run a one-line script
